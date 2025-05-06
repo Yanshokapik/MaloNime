@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mon site dédié aux animes et mangas : actualités, catégories et recherche instantanée.">
+  <title>Mon Site d'Animes et Mangas</title>
+  <style>
+    /* --- Reset & Base Styles --- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      line-height: 1.6;
+    }
+    a { color: #1abc9c; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header, footer { background-color: #34495e; padding: 1em; text-align: center; }
+    nav ul { list-style: none; display: flex; justify-content: center; gap: 1.5em; }
+
+    /* --- Layout Sections --- */
+    .search-bar { padding: 1em; text-align: center; }
+    .search-bar input {
+      width: 60%; max-width: 300px;
+      padding: 0.5em;
+      border: 1px solid #7f8c8d;
+      border-radius: 4px;
+    }
+    .search-bar button {
+      padding: 0.5em 1em;
+      margin-left: 0.5em;
+      border: none;
+      border-radius: 4px;
+      background-color: #1abc9c;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    main { padding: 1em; }
+    #news { margin-bottom: 2em; }
+    #news h2 { margin-bottom: 0.5em; }
+    #news-list { list-style: disc inside; }
+
+    .anime-manga-sections {
+      display: flex;
+      gap: 1em;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-bottom: 4em;
+    }
+    .anime-section, .manga-section {
+      flex: 1 1 300px;
+      background-color: #34495e;
+      padding: 1em;
+      border-radius: 6px;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .search-bar input { width: 80%; }
+      nav ul { flex-direction: column; gap: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mon Site d'Animes et Mangas</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/">Accueil</a></li>
+      <li><a href="/anime">Animes</a></li>
+      <li><a href="/manga">Mangas</a></li>
+      <li><a href="/recherche">Recherche</a></li>
+    </ul>
+  </nav>
+
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Rechercher des animes ou mangas...">
+    <button id="search-btn">Rechercher</button>
+  </div>
+
+  <main>
+    <section id="news">
+      <h2>Dernières News</h2>
+      <ul id="news-list">
+        <!-- Les news seront chargées dynamiquement -->
+      </ul>
+    </section>
+
+    <section class="anime-manga-sections">
+      <article class="anime-section">
+        <h2>Animes</h2>
+        <p>Découvrez nos animes par catégorie :</p>
+        <ul>
+          <li><a href="/anime/sport">Sport</a></li>
+          <li><a href="/anime/fantastique">Fantastique</a></li>
+          <li><a href="/anime/slice-of-life">Slice of Life</a></li>
+        </ul>
+      </article>
+
+      <article class="manga-section">
+        <h2>Mangas</h2>
+        <p>Découvrez nos mangas par catégorie :</p>
+        <ul>
+          <li><a href="/manga/sport">Sport</a></li>
+          <li><a href="/manga/aventure">Aventure</a></li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mon Site d'Animes et Mangas</p>
+  </footer>
+
+  <script>
+    // Exemples de données de news
+    const newsData = [
+      { title: 'Nouvel épisode de Demon Slayer disponible', link: '#' },
+      { title: 'Publication du dernier chapitre de One Piece', link: '#' },
+      { title: 'Annonce d'une nouvelle saison de Attack on Titan', link: '#' }
+    ];
+
+    const newsList = document.getElementById('news-list');
+    newsData.forEach(item => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = item.link;
+      a.textContent = item.title;
+      li.appendChild(a);
+      newsList.appendChild(li);
+    });
+
+    // Fonction de recherche simple
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.getElementById('search-btn');
+    searchBtn.addEventListener('click', () => {
+      const term = searchInput.value.toLowerCase();
+      document.querySelectorAll('main ul li').forEach(li => {
+        const text = li.textContent.toLowerCase();
+        li.style.display = text.includes(term) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
