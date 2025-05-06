@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Animes A-Z</title>
+  <style>
+    body { font-family: sans-serif; background: #2c3e50; color: #ecf0f1; padding: 1em; }
+    header, footer { text-align: center; margin-bottom: 1em; }
+    .letters { text-align: center; margin-bottom: 2em; }
+    .letters a { margin: 0 0.3em; text-decoration: none; color: #1abc9c; }
+    .letters a.disabled { color: #7f8c8d; pointer-events: none; }
+    .list { max-width: 800px; margin: auto; }
+    .list h2 { margin-top: 1.5em; }
+    .list p { margin: 0.3em 0; }
+    nav.top { text-align: center; margin-bottom: 1em; }
+    nav.top a { color: #ecf0f1; margin: 0 0.5em; text-decoration: none; }
+    nav.top a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header><h1>Animes A-Z</h1></header>
+  <nav class="top">
+    <a href="../index.html">← Retour à l’accueil</a>
+    <a href="../anime">Toutes les catégories Anime</a>
+  </nav>
+  <nav class="letters">
+    <!-- Génération des liens A→Z -->
+    <script>
+      const lettersDiv = document.querySelector('.letters');
+      for (let i = 65; i <= 90; i++) {
+        const L = String.fromCharCode(i);
+        const a = document.createElement('a');
+        a.textContent = L;
+        a.href = `#${L}`;
+        a.className = 'disabled';
+        lettersDiv.appendChild(a);
+      }
+    </script>
+  </nav>
+  <main class="list">
+    <script>
+      // Remplace ce tableau par tes titres d'animes
+      const animeList = [
+        'Bleach','Death Note','Fullmetal Alchemist','One Piece','Steins;Gate'
+      ];
+      const container = document.querySelector('.list');
+      animeList.sort().forEach(title => {
+        const letter = title.charAt(0).toUpperCase();
+        if (!container.querySelector(`#${letter}`)) {
+          const h2 = document.createElement('h2');
+          h2.id = letter;
+          h2.textContent = letter;
+          container.appendChild(h2);
+          // active le lien
+          document.querySelector(`.letters a[href="#${letter}"]`)
+                  .classList.remove('disabled');
+        }
+        const p = document.createElement('p');
+        p.textContent = title;
+        container.appendChild(p);
+      });
+    </script>
+  </main>
+  <footer>&copy; 2025 Mon Site d'Animes et Mangas</footer>
+</body>
+</html>
